@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RFQ Info | Duo Warehouse Pro</title>
+<style>
+  :root { --navy:#0b2a4a; --blue:#1155CC; --line:#d9e2ec; --bg:#f5f7fa; --ok:#0f766e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:#1a1a1a; }
+  .topbar { background:var(--navy); color:#fff; padding:14px 28px; display:flex; justify-content:space-between; align-items:center; }
+  .topbar .brand { font-weight:700; }
+  .topbar .url { font-size:13px; opacity:.85; font-family: ui-monospace, monospace; }
+  .badge { background:#f59e0b; color:#111; font-size:11px; font-weight:700; padding:4px 8px; border-radius:999px; margin-left:10px; }
+  .wrap { max-width:760px; margin:24px auto; padding:0 16px 48px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(11,42,74,.06); overflow:hidden; }
+  .card-head { padding:20px 28px 10px; border-bottom:1px solid var(--line); }
+  .card-head h1 { margin:0 0 6px; font-size:22px; color:var(--navy); }
+  .card-head p { margin:0; color:#52606d; font-size:14px; }
+  .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:14px 28px 0; }
+  .step { text-align:center; font-size:11px; color:#829ab1; }
+  .step .dot { height:6px; border-radius:999px; background:#d9e2ec; margin-bottom:6px; }
+  .step.active { color:var(--navy); font-weight:700; }
+  .step.active .dot, .step.done .dot { background:var(--blue); }
+  .step.done .dot { background:var(--ok); }
+  form { padding:4px 28px 24px; }
+  .page { display:none; }
+  .page.active { display:block; }
+  label { display:block; font-size:13px; font-weight:700; color:#334e68; margin:14px 0 6px; }
+  input[type=text], input[type=email], input[type=number], select {
+    width:100%; padding:11px 12px; border:1px solid #bcccdc; border-radius:8px; font-size:15px;
+  }
+  .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .hint { font-size:12px; color:#829ab1; margin-top:4px; }
+  .check { display:flex; align-items:center; gap:10px; margin:12px 0; font-size:14px; color:#243b53; }
+  .check input { width:18px; height:18px; }
+  .check.locked { opacity:.85; }
+  .check.locked input { accent-color: var(--ok); }
+  .actions { display:flex; justify-content:space-between; gap:12px; margin-top:22px; }
+  button { border:0; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:700; cursor:pointer; }
+  .btn-sec { background:#e2e8f0; color:#243b53; }
+  .btn-pri { background:var(--blue); color:#fff; }
+  .foot { margin-top:12px; font-size:12px; color:#829ab1; text-align:center; }
+  .err{color:#b42318;font-size:12px;margin-top:6px;display:none}
+  .hp{position:absolute;left:-9999px}
+  .sec{font-size:12px;color:#52606d;background:#eef4ff;border:1px solid #c9dafc;border-radius:8px;padding:10px 12px;margin-top:16px}
+  input:invalid.touched, select:invalid.touched{border-color:#b42318}
+</style>
+</head><body>
+<div class="topbar"><div><span class="brand">Duo Warehouse Pro</span></div><div class="url">duowarehouse.com/rfq-info</div></div>
+<div class="wrap"><div class="card">
+<div class="card-head"><h1>RFQ Info</h1><p>Request a warehousing quote · 4 quick steps</p></div>
+<div class="steps">
+<div class="step active" id="s1"><div class="dot"></div>1. Customer Info</div>
+<div class="step" id="s2"><div class="dot"></div>2. Pallet Info</div>
+<div class="step" id="s3"><div class="dot"></div>3. Quantity</div>
+<div class="step" id="s4"><div class="dot"></div>4. Scope</div>
+</div>
+<form id="rfq" action="https://formsubmit.co/sales@solowp.com" method="POST">
+<input type="hidden" name="_subject" id="subj" value="New RFQ - duowarehouse.com/rfq-info"/>
+<input type="hidden" name="_captcha" value="true"/>
+<input type="hidden" name="_template" value="table"/>
+<input type="hidden" name="_next" value="https://77chrysler-code.github.io/duo-rfq/thanks.html"/>
+<input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off"/>
+<div class="page active" id="p1">
+<label>Customer Name *</label><input type="text" name="Customer Name" placeholder="Full name" required/>
+<label>Customer Company *</label><input type="text" name="Customer Company" placeholder="Company name" required/>
+<label>Customer Email *</label><input type="email" name="email" placeholder="name@company.com" required/>
+<label>RFQ ID</label><input type="text" name="RFQ ID" placeholder="e.g. RFQ-12345"/>
+<label>RFQ Name *</label><input type="text" name="RFQ Name" id="rfqname" placeholder="Short name for this RFQ" required/>
+<label>Special Pricing Referral Company</label><input type="text" name="Special Pricing Referral Company" placeholder="Referral company (if any)"/>
+<div class="actions"><span></span><button type="button" class="btn-pri" onclick="next(1)">Next: Pallet Info →</button></div>
+</div>
+<div class="page" id="p2">
+<label>Pallet Weight (kg) *</label><input type="number" name="Pallet Weight (kg)" step="1" min="1" placeholder="0" required/>
+<div class="hint">Whole kilograms only (0 decimals)</div>
+<label>Pallet dimensions (mm) *</label>
+<div class="row">
+<div><input type="number" name="Pallet Length (mm)" step="1" min="1" placeholder="L" required/><div class="hint">Length</div></div>
+<div><input type="number" name="Pallet Width (mm)" step="1" min="1" placeholder="W" required/><div class="hint">Width</div></div>
+<div><input type="number" name="Pallet Height (mm)" step="1" min="1" placeholder="H" required/><div class="hint">Height</div></div>
+</div>
+<label>Pallet Stickability *</label>
+<select name="Pallet Stickability" required><option value="">Select…</option><option>1 pallet high</option><option>2 pallets high</option><option>3 pallets high</option><option>4 pallets high</option><option>5 pallets high</option></select>
+<input type="hidden" name="Is HAZMAT" value="No"/><label class="check"><input type="checkbox" name="Is HAZMAT" value="Yes"/> Is HAZMAT?</label>
+<input type="hidden" name="Industrial Racks Preferred" value="No"/><label class="check"><input type="checkbox" name="Industrial Racks Preferred" value="Yes"/> Industrial Racks Preferred</label>
+<input type="hidden" name="Product is Palletized" value="No"/><label class="check"><input type="checkbox" name="Product is Palletized" value="Yes"/> Product is Palletized</label>
+<div class="actions"><button type="button" class="btn-sec" onclick="go(1)">← Back</button><button type="button" class="btn-pri" onclick="next(2)">Next: Quantity →</button></div>
+</div>
+<div class="page" id="p3">
+<div class="row2">
+<div><label>Est. Pallets IN / month *</label><input type="number" name="Est. Pallets IN per month" step="1" min="0" placeholder="0" required/></div>
+<div><label>Est. Pallets OUT / month *</label><input type="number" name="Est. Pallets OUT per month" step="1" min="0" placeholder="0" required/></div>
+</div>
+<label>How Many Months of Inventory *</label>
+<select name="Months of Inventory" required><option value="">Select…</option><option>1 month</option><option>2 months</option><option>3 months</option><option>4 months</option></select>
+<div class="actions"><button type="button" class="btn-sec" onclick="go(2)">← Back</button><button type="button" class="btn-pri" onclick="next(3)">Next: Scope →</button></div>
+</div>
+<div class="page" id="p4">
+<label>SOLO Should Coordinate Trucks? *</label>
+<select name="SOLO Should Coordinate Trucks" required><option value="">Select…</option><option>Yes</option><option>No</option></select>
+<input type="hidden" name="Software License" value="Yes (required)"/>
+<label class="check locked"><input type="checkbox" checked disabled/> Software License <span class="hint">(required · locked on)</span></label>
+<input type="hidden" name="Need IMMEX Certification MEX" value="No"/><label class="check"><input type="checkbox" name="Need IMMEX Certification MEX" value="Yes"/> Need IMMEX Certification MEX</label>
+<input type="hidden" name="Need FTZ Certification (USA)" value="No"/><label class="check"><input type="checkbox" name="Need FTZ Certification (USA)" value="Yes"/> Need FTZ Certification (USA)</label>
+<input type="hidden" name="Need Customs Brokering Service (USA)" value="No"/><label class="check"><input type="checkbox" name="Need Customs Brokering Service (USA)" value="Yes"/> Need Customs Brokering Service (USA)</label>
+<label>Additional Scope Notes</label><input type="text" name="Additional Scope Notes" placeholder="Anything else we should know (optional)"/>
+<div class="sec">🔒 Spam protection: after you click Submit, you’ll complete a quick “I’m not a robot” reCAPTCHA check, then your RFQ is emailed to our sales team.</div>
+<div class="actions"><button type="button" class="btn-sec" onclick="go(3)">← Back</button><button type="submit" class="btn-pri" id="sub">Submit RFQ</button></div>
+</div>
+<div class="foot">Submissions go to sales@solowp.com</div>
+</form></div></div>
+<script>
+const f=document.getElementById('rfq');
+function go(n){for(let i=1;i<=4;i++){document.getElementById('p'+i).classList.toggle('active',i===n);document.getElementById('s'+i).className='step'+(i===n?' active':(i<n?' done':''));}window.scrollTo(0,0);}
+function ok(n){for(const el of document.querySelectorAll('#p'+n+' input,#p'+n+' select')){el.classList.add('touched');if(!el.checkValidity()){el.reportValidity();return false;}}return true;}
+function next(n){if(ok(n))go(n+1);}
+// checked box overrides its hidden "No" (FormSubmit keeps last value for duplicate names)
+f.addEventListener('submit',e=>{for(let n=1;n<=4;n++){if(!ok(n)){e.preventDefault();go(n);ok(n);return;}}
+document.querySelectorAll('.check input[type=checkbox][name]').forEach(cb=>{const h=cb.parentElement.previousElementSibling;if(h&&h.type==='hidden')h.disabled=cb.checked;});
+document.getElementById('subj').value='New RFQ: '+document.getElementById('rfqname').value;
+document.getElementById('sub').disabled=true;document.getElementById('sub').textContent='Submitting…';});
+</script></body></html>
