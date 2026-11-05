@@ -1,1 +1,51 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RFQ Info | Duo Warehouse Pro</title>
+<style>
+  :root { --navy:#0b2a4a; --blue:#1155CC; --line:#d9e2ec; --bg:#f5f7fa; --ok:#0f766e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:#1a1a1a; }
+  .topbar { background:var(--navy); color:#fff; padding:14px 28px; display:flex; justify-content:space-between; align-items:center; }
+  .topbar .brand { font-weight:700; }
+  .topbar .url { font-size:13px; opacity:.85; font-family: ui-monospace, monospace; }
+  .badge { background:#f59e0b; color:#111; font-size:11px; font-weight:700; padding:4px 8px; border-radius:999px; margin-left:10px; }
+  .wrap { max-width:760px; margin:24px auto; padding:0 16px 48px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(11,42,74,.06); overflow:hidden; }
+  .card-head { padding:20px 28px 10px; border-bottom:1px solid var(--line); }
+  .card-head h1 { margin:0 0 6px; font-size:22px; color:var(--navy); }
+  .card-head p { margin:0; color:#52606d; font-size:14px; }
+  .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:14px 28px 0; }
+  .step { text-align:center; font-size:11px; color:#829ab1; }
+  .step .dot { height:6px; border-radius:999px; background:#d9e2ec; margin-bottom:6px; }
+  .step.active { color:var(--navy); font-weight:700; }
+  .step.active .dot, .step.done .dot { background:var(--blue); }
+  .step.done .dot { background:var(--ok); }
+  form { padding:4px 28px 24px; }
+  .page { display:none; }
+  .page.active { display:block; }
+  label { display:block; font-size:13px; font-weight:700; color:#334e68; margin:14px 0 6px; }
+  input[type=text], input[type=email], input[type=number], select {
+    width:100%; padding:11px 12px; border:1px solid #bcccdc; border-radius:8px; font-size:15px;
+  }
+  .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .hint { font-size:12px; color:#829ab1; margin-top:4px; }
+  .check { display:flex; align-items:center; gap:10px; margin:12px 0; font-size:14px; color:#243b53; }
+  .check input { width:18px; height:18px; }
+  .check.locked { opacity:.85; }
+  .check.locked input { accent-color: var(--ok); }
+  .actions { display:flex; justify-content:space-between; gap:12px; margin-top:22px; }
+  button { border:0; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:700; cursor:pointer; }
+  .btn-sec { background:#e2e8f0; color:#243b53; }
+  .btn-pri { background:var(--blue); color:#fff; }
+  .foot { margin-top:12px; font-size:12px; color:#829ab1; text-align:center; }
+  .err{color:#b42318;font-size:12px;margin-top:6px;display:none}
+  .hp{position:absolute;left:-9999px}
+  .sec{font-size:12px;color:#52606d;background:#eef4ff;border:1px solid #c9dafc;border-radius:8px;padding:10px 12px;margin-top:16px}
+  input:invalid.touched, select:invalid.touched{border-color:#b42318}
+</style>
+</head><body>
+<div class="topbar"><div><span class="brand">Duo Warehouse Pro</span></div><div class="url">rfq-warehouse.solowp.com</div></div>
+<div class="wrap"><div class="card">
+<div class="card-head"><h1>Thank you — RFQ received</h1><p>Our sales team (sales@solowp.com) will follow up shortly.</p></div>
+<form><div class="actions"><span></span><a class="btn-pri" style="text-decoration:none;padding:12px 18px;border-radius:8px" href="https://www.duowarehouse.com">Back to Duo Warehouse</a></div></form></div></div></body></html>
